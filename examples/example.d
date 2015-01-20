@@ -5,6 +5,7 @@ import std.stdio : writefln, readln;
 
 void main() {
 	string fileName = "test.ini";
+	// Thread-safe instance, for a non thread-safe instance replace "true" with "false"
 	auto ini = new IniFile!(true)(fileName);
 	// Use open() for reading and close() for write. Both can be combined ...
 	if (!ini.exists()) {
