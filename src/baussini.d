@@ -454,10 +454,14 @@ public:
 	auto getSection(string section) {
 		static if (sync) {
 			synchronized {
+				if(!hasSection(section))
+					throw new IniException(format("%s is not an existing section.", section));
 				return m_sections[section];
 			}
 		}
 		else {
+			if(!hasSection(section))
+				throw new IniException(format("%s is not an existing section.", section));
 			return m_sections[section];
 		}
 	}
@@ -488,10 +492,14 @@ public:
 	auto read(T)(string section, string key) {
 		static if (sync) {
 			synchronized {
+				if(!hasSection(section))
+					throw new IniException(format("%s is not an existing section.", section));
 				return m_sections[section].read!T(key);
 			}
 		}
 		else {
+			if(!hasSection(section))
+				throw new IniException(format("%s is not an existing section.", section));
 			return m_sections[section].read!T(key);
 		}
 	}
@@ -506,10 +514,14 @@ public:
 	void write(T)(string section, string key, T value) {
 		static if (sync) {
 			synchronized {
+				if(!hasSection(section))
+					throw new IniException(format("%s is not an existing section.", section));
 				m_sections[section].write!T(key, value);
 			}
 		}
 		else {
+			if(!hasSection(section))
+				throw new IniException(format("%s is not an existing section.", section));
 			m_sections[section].write!T(key, value);
 		}
 	}
@@ -524,10 +536,14 @@ public:
 	bool hasKey(string section, string key) {
 		static if (sync) {
 			synchronized {
+				if(!hasSection(section))
+					throw new IniException(format("%s is not an existing section.", section));
 				return m_sections[section].hasKey(key);
 			}
 		}
 		else {
+			if(!hasSection(section))
+				throw new IniException(format("%s is not an existing section.", section));
 			return m_sections[section].hasKey(key);
 		}
 	}
