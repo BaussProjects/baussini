@@ -548,6 +548,50 @@ public:
 		}
 	}
 	
+	@property {
+		/**
+		*	Gets the filename of the inifile.
+		*/
+		string fileName() {
+			static if (sync) {
+				synchronized {
+					return m_fileName;
+				}
+			}
+			else {
+				return m_fileName;
+			}
+		}
+		
+		/**
+		*	Gets all the section names.
+		*/
+		string[] sectionNames() {
+			static if (sync) {
+				synchronized {
+					return m_sections.keys;
+				}
+			}
+			else {
+				return m_sections.keys;
+			}
+		}
+		
+		/**
+		*	Gets all the sections.
+		*/
+		IniSection!(sync)[] sections() {
+			static if (sync) {
+				synchronized {
+					return m_sections.values;
+				}
+			}
+			else {
+				return m_sections.values;
+			}
+		}
+	}
+	
 	/**
 	*	Deconstructor for closing the inifile.
 	*/
