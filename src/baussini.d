@@ -63,8 +63,7 @@ private:
 	string getWritable() {
 		string[] s = [format("[%s]", m_name)];
 		foreach (key, value; m_entries) {
-			if (value && value != "")
-				s ~= format("%s=%s", key, value);
+			s ~= format("%s=%s", key, value);
 		}
 		return join(s, "\r\n");
 	}
@@ -160,17 +159,15 @@ public:
 	auto read(T)(string key) {
 		static if (sync) {
 			synchronized {
-				auto val = getValue(key, "");
-				if (val == "")
+				if(!hasKey(key))
 					throw new IniException(format("%s does not exist in the section.", key));
-				return to!T(val);
+				return to!T(getValue(key, ""));
 			}
 		}
 		else {
-			auto val = getValue(key, "");
-			if (val == "")
+			if(!hasKey(key))
 				throw new IniException(format("%s does not exist in the section.", key));
-			return to!T(val);
+			return to!T(getValue(key, ""));
 		}
 	}
 	
@@ -185,18 +182,16 @@ public:
 	auto read(T)(string key, out T value) {
 		static if (sync) {
 			synchronized {
-				auto val = getValue(key, "");
-				if (val == "")
+				if(!hasKey(key))
 					throw new IniException(format("%s does not exist in the section.", key));
-				value = to!T(val);
+				value = to!T(getValue(key, ""));
 				return this;
 			}
 		}
 		else {
-			auto val = getValue(key, "");
-			if (val == "")
+			if(!hasKey(key))
 				throw new IniException(format("%s does not exist in the section.", key));
-			value = to!T(val);
+			value = to!T(getValue(key, ""));
 			return this;
 		}
 	}
@@ -232,11 +227,11 @@ public:
 	bool hasKey(string key) {
 		static if (sync) {
 			synchronized {
-				return getValue(key, "") != "";
+				return (key in m_entries) !is null;
 			}
 		}
 		else {
-			return getValue(key, "") != "";
+			return (key in m_entries) !is null;
 		}
 	}
 	
