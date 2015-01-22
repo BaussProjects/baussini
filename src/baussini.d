@@ -591,18 +591,4 @@ public:
 			}
 		}
 	}
-	
-	/**
-	*	Deconstructor for closing the inifile.
-	*/
-	~this() {
-		static if (sync) {
-			synchronized {
-				close();
-			}
-		}
-		else {
-			close();
-		}
-	}
 }
