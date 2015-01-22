@@ -1,5 +1,5 @@
 # baussini
-An advanced, simple to use, thread-safe by choice inifile wrapper.
+An advanced, simple to use, thread-safe by choice inifile wrapper written in the D programming language.
 # Features
 * Thread-safety by choice
 * Read/Write entries
