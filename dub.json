@@ -1,0 +1,7 @@
+{
+	"name": "baussini",
+	"description": "An advanced, simple to use, thread-safe by choice inifile wrapper written in the D programming language.",
+	"license": "Boost License",
+	"targetType": "library",
+	"sourcePaths": ["src"]
+}
