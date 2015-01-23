@@ -3,7 +3,7 @@
 *	It supports template writing/reading for values.
 *	Please view example.d for an example.
 */
-module baussini.baussini;
+module baussini;
 
 // Imports ...
 import std.conv : to;
