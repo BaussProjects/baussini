@@ -1,0 +1,7 @@
+{
+	"name": "baussini",
+	"description": "Advanced, simple to use, thread-safe by choice inifile wrapper.",
+	"license": "Boost License",
+	"targetType": "library",
+	"sourcePaths": ["src"]
+}
