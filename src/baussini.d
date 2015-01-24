@@ -9,7 +9,7 @@ module baussini;
 import std.conv : to;
 import std.string : format;
 import std.array : replace, split, join;
-import std.algorithm : canFind, startsWith, endsWith, stripLeft;
+import std.algorithm : canFind, startsWith, endsWith, stripLeft, stripRight;
 import std.traits : isIntegral, isFloatingPoint;
 
 import std.file;
@@ -335,8 +335,14 @@ private:
 				}
 				else if (canFind(line, "=") && currentSection) {
 					auto data = split(line, "=");
-					if (data.length == 2)
-						currentSection.write(data[0], data[1]);
+					if (data.length == 2) {
+						auto key = stripRight(data[0], ' ');
+						key = stripLeft(key, ' ');
+						auto value = split(data[1], ";")[0];
+						value = stripRight(value, ' ');
+						value = stripLeft(value, ' ');
+						currentSection.write(key, value);
+					}
 				}
 			}
 		}
